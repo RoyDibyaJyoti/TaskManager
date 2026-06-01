@@ -1,0 +1,19 @@
+[ {
+  "id" : "60a1939c-9068-4513-b3de-0557ac31a486",
+  "title" : "Prepare Hackathon",
+  "description" : "Hackathon in IIT Hyderabad. It is very important.",
+  "dueDate" : "2026-06-03",
+  "priority" : "CRITICAL",
+  "categoryName" : "Work",
+  "completed" : false,
+  "createdAt" : "2026-06-02"
+}, {
+  "id" : "52cd9f58-ae58-4f8a-9892-26cc02462d16",
+  "title" : "perfect",
+  "description" : "now it is well decorated",
+  "dueDate" : "2026-06-01",
+  "priority" : "MEDIUM",
+  "categoryName" : "Personal",
+  "completed" : true,
+  "createdAt" : "2026-06-02"
+} ]

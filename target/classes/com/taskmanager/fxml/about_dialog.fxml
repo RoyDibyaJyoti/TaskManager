@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.SVGPath?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.taskmanager.controller.AboutDialogController"
+      spacing="24.0" alignment="CENTER" prefWidth="440.0" styleClass="dialog-root">
+    
+    <padding>
+        <Insets top="32.0" right="32.0" bottom="32.0" left="32.0" />
+    </padding>
+    
+    <!-- Vector Logo (Checkmark inside circle) -->
+    <StackPane prefHeight="70.0" alignment="CENTER">
+        <SVGPath content="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                 styleClass="about-logo" />
+    </StackPane>
+    
+    <!-- Application Info Header -->
+    <VBox spacing="6.0" alignment="CENTER">
+        <Label text="TaskManager" styleClass="about-title" />
+        <Label text="Professional Task Management Suite" styleClass="about-subtitle" />
+    </VBox>
+    
+    <Separator styleClass="dialog-separator" />
+    
+    <!-- Technical Specifications Grid -->
+    <GridPane vgap="10.0" hgap="15.0" alignment="CENTER" maxWidth="320.0">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="40.0" halignment="RIGHT" />
+            <ColumnConstraints percentWidth="60.0" halignment="LEFT" />
+        </columnConstraints>
+        
+        <Label text="Application:" styleClass="about-grid-label" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+        <Label text="TaskManager" styleClass="about-grid-value-bold" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+        
+        <Label text="Version:" styleClass="about-grid-label" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+        <Label text="1.0.0" styleClass="about-grid-value" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+        
+        <Label text="Developer:" styleClass="about-grid-label" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+        <Label text="DIBYA JYOTI ROY" styleClass="about-grid-value-bold" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+        
+        <Label text="Technology:" styleClass="about-grid-label" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+        <Label text="JavaFX" styleClass="about-grid-value" GridPane.rowIndex="3" GridPane.columnIndex="1" />
+        
+        <Label text="Platform:" styleClass="about-grid-label" GridPane.rowIndex="4" GridPane.columnIndex="0" />
+        <Label text="macOS" styleClass="about-grid-value" GridPane.rowIndex="4" GridPane.columnIndex="1" />
+    </GridPane>
+    
+    <Separator styleClass="dialog-separator" />
+    
+    <!-- Copyright & Disclaimer -->
+    <VBox spacing="4.0" alignment="CENTER">
+        <Label text="© 2026 DIBYA JYOTI ROY." styleClass="about-copyright" />
+        <Label text="All rights reserved." styleClass="about-copyright" />
+    </VBox>
+    
+    <Button fx:id="btnClose" text="Close" onAction="#handleClose" styleClass="btn-secondary" prefWidth="120.0" prefHeight="34.0" />
+</VBox>

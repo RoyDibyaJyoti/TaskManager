@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.SVGPath?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.taskmanager.controller.MainController"
+            prefWidth="1000.0" prefHeight="700.0" styleClass="main-container">
+    
+    <!-- Top System Menu Bar (MacOS Unified Menu Bar) -->
+    <top>
+        <MenuBar useSystemMenuBar="true">
+            <menus>
+                <Menu text="File">
+                    <items>
+                        <MenuItem text="New Task..." onAction="#handleAddTask" accelerator="Shortcut+N" />
+                        <MenuItem text="Preferences..." onAction="#handlePreferences" accelerator="Shortcut+," />
+                        <SeparatorMenuItem />
+                        <MenuItem text="Close Window" onAction="#handleExit" accelerator="Shortcut+W" />
+                    </items>
+                </Menu>
+                <Menu text="Edit">
+                    <items>
+                        <MenuItem text="Edit Selected Task..." onAction="#handleEditTask" accelerator="Shortcut+E" />
+                        <MenuItem text="Delete Selected Task" onAction="#handleDeleteTask" accelerator="Shortcut+BackSpace" />
+                        <MenuItem text="Toggle Selected Status" onAction="#handleToggleStatus" accelerator="Shortcut+D" />
+                    </items>
+                </Menu>
+                <Menu text="View">
+                    <items>
+                        <MenuItem text="Dashboard" onAction="#showDashboard" accelerator="Shortcut+1" />
+                        <MenuItem text="Tasks List" onAction="#showTasks" accelerator="Shortcut+2" />
+                        <MenuItem text="Categories" onAction="#showCategories" accelerator="Shortcut+3" />
+                        <MenuItem text="Settings" onAction="#showSettings" accelerator="Shortcut+4" />
+                        <SeparatorMenuItem />
+                        <MenuItem text="Toggle Dark Mode" onAction="#handleThemeToggleShortcut" accelerator="Shortcut+T" />
+                    </items>
+                </Menu>
+                <Menu text="Help">
+                    <items>
+                        <MenuItem text="About TaskManager" onAction="#handleAbout" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    
+    <!-- Sidebar Navigation -->
+    <left>
+        <VBox styleClass="sidebar" spacing="10.0" prefWidth="220.0">
+            <Label text="TaskManager" styleClass="sidebar-title" />
+            
+            <Button fx:id="btnDashboard" text="Dashboard" onAction="#showDashboard"
+                    styleClass="sidebar-button, sidebar-button-active" maxWidth="Infinity">
+                <graphic>
+                    <SVGPath content="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" styleClass="sidebar-icon" />
+                </graphic>
+            </Button>
+            <Button fx:id="btnTasks" text="Tasks List" onAction="#showTasks"
+                    styleClass="sidebar-button" maxWidth="Infinity">
+                <graphic>
+                    <SVGPath content="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" styleClass="sidebar-icon" />
+                </graphic>
+            </Button>
+            <Button fx:id="btnCategories" text="Categories" onAction="#showCategories"
+                    styleClass="sidebar-button" maxWidth="Infinity">
+                <graphic>
+                    <SVGPath content="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 8c-.83 0-1.5-.67-1.5-1.5S4.67 5 5.5 5 7 5.67 7 6.5 6.33 8 5.5 8z" styleClass="sidebar-icon" />
+                </graphic>
+            </Button>
+            <Button fx:id="btnSettings" text="Settings" onAction="#showSettings"
+                    styleClass="sidebar-button" maxWidth="Infinity">
+                <graphic>
+                    <SVGPath content="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49 1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z" styleClass="sidebar-icon" />
+                </graphic>
+            </Button>
+            
+            <Region VBox.vgrow="ALWAYS" />
+            
+            <VBox spacing="5" alignment="CENTER" styleClass="sidebar-footer">
+                <Separator style="-fx-opacity: 0.1;" />
+                <Label text="v1.0.0" style="-fx-text-fill: -color-sidebar-text; -fx-font-size: 11px;" />
+            </VBox>
+        </VBox>
+    </left>
+    
+    <!-- Main Content Area -->
+    <center>
+        <StackPane>
+            
+            <!-- 1. DASHBOARD VIEW -->
+            <VBox fx:id="paneDashboard" styleClass="content-pane" spacing="20.0" visible="true">
+                <VBox styleClass="view-header">
+                    <Label text="Dashboard" styleClass="view-title" />
+                    <Label text="Welcome back! Here's an overview of your tasks." styleClass="view-subtitle" />
+                </VBox>
+                
+                <!-- Metric Cards -->
+                <GridPane hgap="20.0" vgap="20.0">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="25.0" />
+                        <ColumnConstraints percentWidth="25.0" />
+                        <ColumnConstraints percentWidth="25.0" />
+                        <ColumnConstraints percentWidth="25.0" />
+                    </columnConstraints>
+                    
+                    <VBox GridPane.columnIndex="0" styleClass="card">
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <Label text="Total Tasks" styleClass="card-title" />
+                            <Label text="All" styleClass="card-badge, badge-total" />
+                        </HBox>
+                        <Label fx:id="lblTotalTasks" text="0" styleClass="card-value" />
+                    </VBox>
+                    
+                    <VBox GridPane.columnIndex="1" styleClass="card">
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <Label text="Completed" styleClass="card-title" />
+                            <Label text="Done" styleClass="card-badge, badge-completed" />
+                        </HBox>
+                        <Label fx:id="lblCompletedTasks" text="0" styleClass="card-value" />
+                    </VBox>
+                    
+                    <VBox GridPane.columnIndex="2" styleClass="card">
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <Label text="Pending" styleClass="card-title" />
+                            <Label text="Todo" styleClass="card-badge, badge-pending" />
+                        </HBox>
+                        <Label fx:id="lblPendingTasks" text="0" styleClass="card-value" />
+                    </VBox>
+                    
+                    <VBox GridPane.columnIndex="3" styleClass="card">
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <Label text="Overdue" styleClass="card-title" />
+                            <Label text="Alert" styleClass="card-badge, badge-overdue" />
+                        </HBox>
+                        <Label fx:id="lblOverdueTasks" text="0" styleClass="card-value" />
+                    </VBox>
+                </GridPane>
+                
+                <!-- Progress Card -->
+                <VBox styleClass="card" spacing="10">
+                    <Label text="COMPLETION PROGRESS" styleClass="card-title" />
+                    <HBox alignment="CENTER_LEFT" spacing="15">
+                        <ProgressBar fx:id="pbCompletion" progress="0.0" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefHeight="15.0" />
+                        <Label fx:id="lblCompletionPercent" text="0%" styleClass="view-title" style="-fx-font-size: 16px;" />
+                    </HBox>
+                </VBox>
+                
+                <!-- Breakdowns -->
+                <HBox spacing="20.0" VBox.vgrow="ALWAYS">
+                    <!-- Priority Breakdown Card -->
+                    <VBox styleClass="card" spacing="15" HBox.hgrow="ALWAYS">
+                        <Label text="Tasks by Priority" styleClass="card-title" />
+                        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;" VBox.vgrow="ALWAYS">
+                            <VBox fx:id="boxPriorityBreakdown" spacing="10" />
+                        </ScrollPane>
+                    </VBox>
+                    
+                    <!-- Category Breakdown Card -->
+                    <VBox styleClass="card" spacing="15" HBox.hgrow="ALWAYS">
+                        <Label text="Tasks by Category" styleClass="card-title" />
+                        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent;" VBox.vgrow="ALWAYS">
+                            <VBox fx:id="boxCategoryBreakdown" spacing="10" />
+                        </ScrollPane>
+                    </VBox>
+                </HBox>
+            </VBox>
+            
+            <!-- 2. TASKS LIST VIEW -->
+            <VBox fx:id="paneTasks" styleClass="content-pane" spacing="15.0" visible="false">
+                <VBox styleClass="view-header">
+                    <Label text="Tasks List" styleClass="view-title" />
+                    <Label text="Manage, search, and organize your tasks." styleClass="view-subtitle" />
+                </VBox>
+                
+                <!-- Filter & Search Toolbar -->
+                <HBox spacing="10.0" alignment="CENTER_LEFT">
+                    <TextField fx:id="txtSearch" promptText="Search tasks..." HBox.hgrow="ALWAYS" prefHeight="38.0" />
+                    
+                    <Label text="Category:" styleClass="label-form" />
+                    <ComboBox fx:id="comboCategoryFilter" prefWidth="130.0" prefHeight="38.0" />
+                    
+                    <Label text="Priority:" styleClass="label-form" />
+                    <ComboBox fx:id="comboPriorityFilter" prefWidth="130.0" prefHeight="38.0" />
+                    
+                    <Label text="Status:" styleClass="label-form" />
+                    <ComboBox fx:id="comboStatusFilter" prefWidth="120.0" prefHeight="38.0" />
+                </HBox>
+                
+                <!-- Tasks TableView -->
+                <TableView fx:id="tableTasks" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colStatus" text="Status" prefWidth="80.0" reorderable="false" resizable="false" />
+                        <TableColumn fx:id="colTitle" text="Title" prefWidth="300.0" />
+                        <TableColumn fx:id="colCategory" text="Category" prefWidth="140.0" />
+                        <TableColumn fx:id="colPriority" text="Priority" prefWidth="120.0" />
+                        <TableColumn fx:id="colDueDate" text="Due Date" prefWidth="120.0" />
+                    </columns>
+                    <placeholder>
+                        <Label text="No tasks found matching current filters." />
+                    </placeholder>
+                </TableView>
+                
+                <!-- Task Actions Panel -->
+                <HBox spacing="10.0" alignment="CENTER_RIGHT">
+                    <Button fx:id="btnToggleStatus" text="Toggle Status" onAction="#handleToggleStatus" styleClass="btn-secondary">
+                        <graphic>
+                            <SVGPath content="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" styleClass="btn-icon-secondary" />
+                        </graphic>
+                    </Button>
+                    <Region HBox.hgrow="ALWAYS" />
+                    <Button fx:id="btnDelete" text="Delete Task" onAction="#handleDeleteTask" styleClass="btn-danger">
+                        <graphic>
+                            <SVGPath content="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" styleClass="btn-icon-danger" />
+                        </graphic>
+                    </Button>
+                    <Button fx:id="btnEdit" text="Edit Task..." onAction="#handleEditTask" styleClass="btn-secondary">
+                        <graphic>
+                            <SVGPath content="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" styleClass="btn-icon-secondary" />
+                        </graphic>
+                    </Button>
+                    <Button fx:id="btnAdd" text="Add Task..." onAction="#handleAddTask" styleClass="btn-primary">
+                        <graphic>
+                            <SVGPath content="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" styleClass="btn-icon-primary" />
+                        </graphic>
+                    </Button>
+                </HBox>
+            </VBox>
+            
+            <!-- 3. CATEGORIES VIEW -->
+            <VBox fx:id="paneCategories" styleClass="content-pane" spacing="20.0" visible="false">
+                <VBox styleClass="view-header">
+                    <Label text="Categories Manager" styleClass="view-title" />
+                    <Label text="Add, customize colors, or delete task categories." styleClass="view-subtitle" />
+                </VBox>
+                
+                <HBox spacing="25.0" VBox.vgrow="ALWAYS">
+                    <!-- Left: Category List -->
+                    <VBox spacing="10" HBox.hgrow="ALWAYS" prefWidth="400.0">
+                        <Label text="Current Categories" styleClass="label-form" />
+                        <TableView fx:id="tableCategories" VBox.vgrow="ALWAYS">
+                            <columns>
+                                <TableColumn fx:id="colCatColor" text="Color" prefWidth="70.0" reorderable="false" resizable="false" />
+                                <TableColumn fx:id="colCatName" text="Name" prefWidth="250.0" />
+                            </columns>
+                            <placeholder>
+                                <Label text="No categories defined." />
+                            </placeholder>
+                        </TableView>
+                        <HBox alignment="CENTER_RIGHT">
+                            <Button fx:id="btnDeleteCategory" text="Delete Selected" onAction="#handleDeleteCategory" styleClass="btn-danger" />
+                        </HBox>
+                    </VBox>
+                    
+                    <!-- Right: Add Category Form -->
+                    <VBox spacing="15.0" prefWidth="300.0" styleClass="card" alignment="TOP_LEFT" maxHeight="300.0">
+                        <Label text="CREATE CATEGORY" styleClass="card-title" />
+                        
+                        <VBox spacing="5.0">
+                            <Label text="Category Name" styleClass="label-form" />
+                            <TextField fx:id="txtCategoryName" promptText="e.g. Finance" />
+                        </VBox>
+                        
+                        <VBox spacing="5.0">
+                            <Label text="Theme Color" styleClass="label-form" />
+                            <ColorPicker fx:id="cpCategoryColor" maxWidth="Infinity" prefHeight="38.0" />
+                        </VBox>
+                        
+                        <Label fx:id="lblCategoryError" styleClass="validation-error-text" wrapText="true" visible="false" />
+                        
+                        <Button fx:id="btnSaveCategory" text="Create Category" onAction="#handleSaveCategory"
+                                styleClass="btn-primary" maxWidth="Infinity" />
+                    </VBox>
+                </HBox>
+            </VBox>
+            
+            <!-- 4. SETTINGS VIEW -->
+            <VBox fx:id="paneSettings" styleClass="content-pane" spacing="20.0" visible="false">
+                <VBox styleClass="view-header">
+                    <Label text="Settings" styleClass="view-title" />
+                    <Label text="Personalize your task manager experience." styleClass="view-subtitle" />
+                </VBox>
+                
+                <VBox styleClass="card" spacing="20.0" maxWidth="600.0">
+                    <Label text="APPEARANCE SETTINGS" styleClass="card-title" />
+                    
+                    <HBox alignment="CENTER_LEFT" spacing="15.0">
+                        <VBox HBox.hgrow="ALWAYS">
+                            <Label text="Dark Theme Mode" styleClass="label-form" style="-fx-font-size: 14px;" />
+                            <Label text="Switch to dark layout for reduced eye strain." style="-fx-text-fill: -color-text-secondary; -fx-font-size: 11px;" />
+                        </VBox>
+                        <CheckBox fx:id="toggleDarkMode" onAction="#handleThemeToggle" style="-fx-cursor: hand;" />
+                    </HBox>
+                </VBox>
+                
+                <VBox styleClass="card" spacing="20.0" maxWidth="600.0">
+                    <Label text="DATA SUMMARY &amp; REPOSITORY" styleClass="card-title" />
+                    
+                    <GridPane vgap="10.0" hgap="10.0">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="30.0" />
+                            <ColumnConstraints percentWidth="70.0" />
+                        </columnConstraints>
+                        <rowConstraints>
+                            <RowConstraints minHeight="25.0" />
+                            <RowConstraints minHeight="25.0" />
+                        </rowConstraints>
+                        
+                        <Label text="Task Source:" styleClass="label-form" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+                        <Label text="data/tasks.json" style="-fx-text-fill: -color-text-secondary;" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+                        
+                        <Label text="Category Source:" styleClass="label-form" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+                        <Label text="data/categories.json" style="-fx-text-fill: -color-text-secondary;" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+                    </GridPane>
+                </VBox>
+            </VBox>
+            
+        </StackPane>
+    </center>
+    
+    <!-- Footer Status Bar -->
+    <bottom>
+        <HBox styleClass="status-bar" alignment="CENTER_LEFT" spacing="10.0">
+            <Label fx:id="lblStatus" text="Ready" styleClass="status-text" HBox.hgrow="ALWAYS" maxWidth="Infinity" />
+            <Separator orientation="VERTICAL" style="-fx-opacity: 0.2;" />
+            <Label fx:id="lblStatsSummary" text="0 Tasks | 0 Completed" styleClass="status-text" />
+        </HBox>
+    </bottom>
+</BorderPane>

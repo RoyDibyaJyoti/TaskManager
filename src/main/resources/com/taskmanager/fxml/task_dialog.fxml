@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.taskmanager.controller.TaskDialogController"
+      spacing="16.0" prefWidth="500.0" styleClass="dialog-root">
+    
+    <padding>
+        <Insets top="24.0" right="24.0" bottom="24.0" left="24.0" />
+    </padding>
+    
+    <!-- Dialog Header -->
+    <VBox spacing="6.0">
+        <Label fx:id="lblDialogTitle" text="Create New Task" styleClass="dialog-header-title" />
+        <Label text="Please fill in the task details below." styleClass="dialog-header-subtitle" />
+    </VBox>
+    
+    <Separator styleClass="dialog-separator" />
+    
+    <!-- Form Inputs -->
+    <VBox spacing="16.0" VBox.vgrow="ALWAYS">
+        <!-- Title Input -->
+        <VBox spacing="6.0">
+            <HBox alignment="BOTTOM_LEFT">
+                <Label text="Task Title *" styleClass="label-form" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Label fx:id="lblTitleError" styleClass="validation-error-text" text="" visible="false" managed="true" />
+            </HBox>
+            <TextField fx:id="txtTitle" promptText="e.g., Design UI prototype" prefHeight="38.0" />
+        </VBox>
+        
+        <!-- Description Input -->
+        <VBox spacing="6.0" VBox.vgrow="ALWAYS">
+            <HBox alignment="BOTTOM_LEFT">
+                <Label text="Description" styleClass="label-form" />
+            </HBox>
+            <TextArea fx:id="txtDescription" promptText="Enter brief details about this task..." prefHeight="120.0" VBox.vgrow="ALWAYS" wrapText="true" />
+        </VBox>
+        
+        <!-- Grid for meta properties -->
+        <GridPane hgap="12.0" vgap="16.0">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="50.0" />
+                <ColumnConstraints percentWidth="50.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints valignment="TOP" />
+                <RowConstraints valignment="TOP" />
+            </rowConstraints>
+            
+            <!-- Priority Dropdown -->
+            <VBox spacing="6.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <HBox alignment="BOTTOM_LEFT">
+                    <Label text="Priority *" styleClass="label-form" />
+                    <Region HBox.hgrow="ALWAYS" />
+                    <Label fx:id="lblPriorityError" styleClass="validation-error-text" text="" visible="false" managed="true" />
+                </HBox>
+                <ComboBox fx:id="comboPriority" promptText="Select priority" maxWidth="Infinity" prefHeight="38.0" />
+            </VBox>
+            
+            <!-- Category Dropdown -->
+            <VBox spacing="6.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <HBox alignment="BOTTOM_LEFT">
+                    <Label text="Category" styleClass="label-form" />
+                </HBox>
+                <ComboBox fx:id="comboCategory" promptText="Select category" maxWidth="Infinity" prefHeight="38.0" />
+            </VBox>
+            
+            <!-- Due Date Picker -->
+            <VBox spacing="6.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                <HBox alignment="BOTTOM_LEFT">
+                    <Label text="Due Date" styleClass="label-form" />
+                </HBox>
+                <DatePicker fx:id="dpDueDate" promptText="Choose due date" maxWidth="Infinity" prefHeight="38.0" />
+            </VBox>
+            
+            <!-- Empty Spacer VBox on the right side of Due Date to maintain alignment -->
+            <VBox spacing="6.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <!-- Keep empty -->
+            </VBox>
+        </GridPane>
+    </VBox>
+    
+    <Separator styleClass="dialog-separator" />
+    
+    <!-- Dialog Actions -->
+    <HBox spacing="12.0" alignment="CENTER_RIGHT">
+        <Button fx:id="btnCancel" text="Cancel" onAction="#handleCancel" styleClass="btn-secondary" prefHeight="36.0" prefWidth="120.0" />
+        <Button fx:id="btnSave" text="Create Task" onAction="#handleSave" styleClass="btn-primary" prefHeight="36.0" prefWidth="120.0" />
+    </HBox>
+</VBox>
